@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GroundnutOil Markets – India Daily Prices</title>
+  <meta name="description" content="India groundnut oil commodity prices covering NCDEX, MCX spot prices, state-wise wholesale, retail rates and price trend charts." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- ===== NAV ===== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <div class="nav-logo">
+        <span class="logo-icon">🥜</span>
+        <span class="logo-text">GroundnutOil<span class="logo-accent">Markets</span></span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#india">India Market</a></li>
+        <li><a href="#live-stocks">📡 Live Stocks</a></li>
+        <li><a href="#chart">Trends</a></li>
+        <li><a href="#news">News</a></li>
+        <li><a href="order.html" class="nav-order-btn">🛒 Order Now</a></li>
+      </ul>
+      <div class="nav-time" id="navTime"></div>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <header class="hero" id="home">
+    <div class="hero-bg"></div>
+    <div class="hero-particles" id="heroParticles"></div>
+    <div class="hero-content">
+      <div class="hero-badge">📈 Live Market Dashboard</div>
+      <h1 class="hero-title">Groundnut Oil<br /><span class="gradient-text">India Markets</span></h1>
+      <p class="hero-subtitle">NCDEX &amp; MCX futures · State-wise spot prices · Retail rates across India</p>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <span class="stat-val" id="heroStatIndia">₹15,840</span>
+          <span class="stat-label">Wholesale (₹/Quintal)</span>
+        </div>
+        <div class="hero-divider"></div>
+        <div class="hero-stat">
+          <span class="stat-val">₹192</span>
+          <span class="stat-label">Retail Avg (₹/Litre)</span>
+        </div>
+        <div class="hero-divider"></div>
+        <div class="hero-stat">
+          <span class="stat-val" id="heroStatChange">+2.3%</span>
+          <span class="stat-label">Today's Change</span>
+        </div>
+      </div>
+      <div class="hero-cta">
+        <a href="#india" class="btn-primary">India Dashboard</a>
+        <a href="#chart" class="btn-secondary">Price Trends</a>
+        <a href="order.html" class="btn-order">🛒 Order Oil</a>
+      </div>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </header>
+
+  <!-- ===== TICKER ===== -->
+  <div class="ticker-wrap">
+    <div class="ticker-track" id="tickerTrack"></div>
+  </div>
+
+  <!-- ===== LIVE STOCKS ===== -->
+  <section class="section live-stocks-section" id="live-stocks">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">📡 Live</span>
+        <h2 class="section-title">Live Stock & Commodity Prices</h2>
+        <p class="section-desc">Real-time quotes for agri-commodity linked stocks &amp; futures · Auto-refreshes every 60 s</p>
+      </div>
+
+      <!-- AI Sentiment Banner -->
+      <div class="ai-sentiment-panel" id="aiSentimentPanel">
+        <div class="ai-sentiment-header">
+          <span class="ai-badge">🤖 AI Market Insight</span>
+          <span class="ai-updated" id="aiUpdatedTime">Analysing…</span>
+        </div>
+        <div class="ai-sentiment-body">
+          <div class="ai-sentiment-score" id="aiSentimentScore">
+            <div class="ai-gauge" id="aiGauge">
+              <svg viewBox="0 0 120 70" class="gauge-svg">
+                <defs>
+                  <linearGradient id="gaugeGrad" x1="0" y1="0" x2="1" y2="0">
+                    <stop offset="0%" stop-color="#ef4444"/>
+                    <stop offset="50%" stop-color="#f5a623"/>
+                    <stop offset="100%" stop-color="#22c55e"/>
+                  </linearGradient>
+                </defs>
+                <path d="M10 65 A50 50 0 0 1 110 65" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="10" stroke-linecap="round"/>
+                <path id="gaugeFill" d="M10 65 A50 50 0 0 1 110 65" fill="none" stroke="url(#gaugeGrad)" stroke-width="10" stroke-linecap="round" stroke-dasharray="157" stroke-dashoffset="157"/>
+                <text x="60" y="62" text-anchor="middle" font-size="18" font-weight="700" fill="#e8ecf0" id="gaugeLabel">–</text>
+              </svg>
+            </div>
+            <div class="ai-sentiment-verdict" id="aiVerdict">Loading…</div>
+          </div>
+          <div class="ai-sentiment-text" id="aiSentimentText">Fetching live market data and running AI analysis…</div>
+          <div class="ai-factors" id="aiFactors"></div>
+        </div>
+      </div>
+
+      <!-- Refresh bar -->
+      <div class="stocks-refresh-bar">
+        <span id="stocksStatus"><span class="live-dot"></span> Live</span>
+        <span>Last refreshed: <strong id="stocksLastRefresh">–</strong></span>
+        <button class="refresh-btn" id="refreshBtn" onclick="refreshStocks()">⟳ Refresh Now</button>
+      </div>
+
+      <!-- Stock cards grid -->
+      <div class="stocks-grid" id="stocksGrid">
+        <div class="stocks-loading" id="stocksLoading">
+          <div class="stocks-spinner"></div>
+          <p>Fetching live prices…</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ===== INDIA MARKET ===== -->
+  <section class="section india-section" id="india">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">🇮🇳 India</span>
+        <h2 class="section-title">India Groundnut Oil Market</h2>
+        <p class="section-desc">NCDEX futures · MCX spot · State-wise wholesale &amp; retail rates · Last updated today</p>
+      </div>
+
+      <!-- Summary KPIs -->
+      <div class="kpi-grid" id="indiaKpis"></div>
+
+      <!-- Tabs -->
+      <div class="tab-bar">
+        <button class="tab-btn active" data-tab="spot" id="tabSpot">Spot Prices</button>
+        <button class="tab-btn" data-tab="retail" id="tabRetail">Retail Rates</button>
+        <button class="tab-btn" data-tab="futures" id="tabFutures">Futures</button>
+      </div>
+
+      <div class="tab-content active" id="tab-spot">
+        <div class="table-wrap">
+          <table class="market-table">
+            <thead>
+              <tr>
+                <th>State / City</th>
+                <th>Market</th>
+                <th>Wholesale (₹/Quintal)</th>
+                <th>Per Litre (₹)</th>
+                <th>Min</th>
+                <th>Max</th>
+                <th>Change</th>
+              </tr>
+            </thead>
+            <tbody id="indiaSpotBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="tab-content" id="tab-retail">
+        <div class="retail-cards" id="indiaRetailCards"></div>
+      </div>
+
+      <div class="tab-content" id="tab-futures">
+        <div class="table-wrap">
+          <table class="market-table">
+            <thead>
+              <tr>
+                <th>Expiry</th>
+                <th>Exchange</th>
+                <th>Open (₹)</th>
+                <th>High (₹)</th>
+                <th>Low (₹)</th>
+                <th>LTP (₹)</th>
+                <th>Change</th>
+                <th>OI (Lots)</th>
+              </tr>
+            </thead>
+            <tbody id="indiaFuturesBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TREND CHART ===== -->
+  <section class="section chart-section" id="chart">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">📊 Trends</span>
+        <h2 class="section-title">Price Trend Analysis</h2>
+        <p class="section-desc">Daily India price movement — Wholesale (₹/Quintal) vs Per Litre (₹/L)</p>
+      </div>
+      <div class="chart-top-bar">
+        <div class="chart-controls">
+          <button class="chart-btn active" data-period="30" id="btn30">30D</button>
+          <button class="chart-btn" data-period="90" id="btn90">90D</button>
+          <button class="chart-btn" data-period="180" id="btn180">180D</button>
+          <button class="chart-btn" data-period="365" id="btn365">1Y</button>
+        </div>
+        <div class="chart-today-price">
+          <div class="ctp-item">
+            <span class="ctp-label">📅 Today's Per Litre</span>
+            <span class="ctp-val gold" id="todayPerLitre">₹172/L</span>
+          </div>
+          <div class="ctp-divider"></div>
+          <div class="ctp-item">
+            <span class="ctp-label">Wholesale</span>
+            <span class="ctp-val" id="todayWholesale">₹15,840/Q</span>
+          </div>
+          <div class="ctp-divider"></div>
+          <div class="ctp-item">
+            <span class="ctp-label">Day Change</span>
+            <span class="ctp-val change-up" id="todayChange">+₹240 (+1.53%)</span>
+          </div>
+        </div>
+      </div>
+      <div class="chart-wrapper">
+        <canvas id="priceChart"></canvas>
+      </div>
+      <div class="chart-legend">
+        <div class="legend-item"><span class="legend-dot green"></span>Wholesale (₹/Quintal) — left axis</div>
+        <div class="legend-item"><span class="legend-dot gold"></span>Per Litre (₹/L) — right axis</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== NEWS ===== -->
+  <section class="section" id="news">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-badge">📰 Market News</span>
+        <h2 class="section-title">Latest Market Updates</h2>
+        <p class="section-desc">Recent developments affecting groundnut oil prices globally</p>
+      </div>
+      <div class="news-grid" id="newsGrid"></div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <span class="logo-icon">🥜</span>
+          <span class="logo-text">GroundnutOil<span class="logo-accent">Markets</span></span>
+          <p>Comprehensive groundnut oil price tracking for traders, processors, and consumers worldwide.</p>
+        </div>
+        <div class="footer-links">
+          <h4>Sections</h4>
+          <a href="#india">India Market</a>
+          <a href="#chart">Price Trends</a>
+          <a href="#news">Market News</a>
+        </div>
+        <div class="footer-info">
+          <h4>Data Sources</h4>
+          <p>NCDEX · MCX · Agmarknet · FAO · USDA</p>
+          <p class="disclaimer">Prices shown are indicative. Data refreshed daily. Always verify with official exchanges before trading.</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 GroundnutOil Markets · All rights reserved</span>
+        <span>Last updated: <span id="footerDate"></span></span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

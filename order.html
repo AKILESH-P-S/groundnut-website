@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Order Groundnut Oil – GroundnutOil Markets</title>
+  <meta name="description" content="Order premium groundnut oil online. Choose your quantity in litres, select grade, and get doorstep delivery across India." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="order.css" />
+</head>
+<body class="order-page">
+
+  <!-- ===== NAV ===== -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-icon">🥜</span>
+        <span class="logo-text">GroundnutOil<span class="logo-accent">Markets</span></span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html#global">Global</a></li>
+        <li><a href="index.html#india">India</a></li>
+        <li><a href="index.html#chart">Trends</a></li>
+        <li><a href="index.html#news">News</a></li>
+        <li><a href="order.html" class="nav-order-active">Order Now</a></li>
+      </ul>
+      <div class="nav-time" id="navTime"></div>
+    </div>
+  </nav>
+
+  <!-- ===== ORDER HERO ===== -->
+  <div class="order-hero">
+    <div class="order-hero-bg"></div>
+    <div class="order-hero-content">
+      <div class="hero-badge">🛒 Place Your Order</div>
+      <h1 class="order-hero-title">Order <span class="gradient-text">Groundnut Oil</span></h1>
+      <p class="order-hero-sub">Premium quality · Any quantity in litres · Fast doorstep delivery across India</p>
+    </div>
+  </div>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main class="order-main">
+    <div class="order-layout">
+
+      <!-- ===== LEFT: FORM ===== -->
+      <div class="order-form-wrap">
+
+        <!-- Step indicator -->
+        <div class="steps-bar">
+          <div class="step active" id="step1Dot"><span class="step-num">1</span><span class="step-label">Product</span></div>
+          <div class="step-line"></div>
+          <div class="step" id="step2Dot"><span class="step-num">2</span><span class="step-label">Details</span></div>
+          <div class="step-line"></div>
+          <div class="step" id="step3Dot"><span class="step-num">3</span><span class="step-label">Delivery</span></div>
+        </div>
+
+        <form id="orderForm" novalidate>
+
+          <!-- ===== STEP 1: Product ===== -->
+          <div class="form-step active" id="formStep1">
+            <h2 class="step-title">Select Your Oil</h2>
+            <p class="step-desc">Choose the type, grade and quantity of groundnut oil</p>
+
+            <!-- Oil Type Cards -->
+            <div class="oil-type-grid">
+              <label class="oil-card" for="typeRefined">
+                <input type="radio" name="oilType" id="typeRefined" value="Refined Groundnut Oil" checked />
+                <div class="oil-card-inner">
+                  <div class="oil-card-icon">✨</div>
+                  <div class="oil-card-name">Refined</div>
+                  <div class="oil-card-desc">Light taste · High smoke point · Daily cooking</div>
+                  <div class="oil-card-price">₹192/Litre</div>
+                </div>
+              </label>
+
+              <label class="oil-card" for="typeColdPressed">
+                <input type="radio" name="oilType" id="typeColdPressed" value="Cold Pressed Groundnut Oil" />
+                <div class="oil-card-inner">
+                  <div class="oil-card-icon">🌿</div>
+                  <div class="oil-card-name">Cold Pressed</div>
+                  <div class="oil-card-desc">Natural flavour · Rich nutrients · Wood-pressed</div>
+                  <div class="oil-card-price">₹290/Litre</div>
+                </div>
+              </label>
+
+              <label class="oil-card" for="typePure">
+                <input type="radio" name="oilType" id="typePure" value="Pure Groundnut Oil" />
+                <div class="oil-card-inner">
+                  <div class="oil-card-icon">💛</div>
+                  <div class="oil-card-name">Pure / Filtered</div>
+                  <div class="oil-card-desc">Traditional filter method · Aromatic · Deep frying</div>
+                  <div class="oil-card-price">₹240/Litre</div>
+                </div>
+              </label>
+
+              <label class="oil-card" for="typeOrganic">
+                <input type="radio" name="oilType" id="typeOrganic" value="Organic Groundnut Oil" />
+                <div class="oil-card-inner">
+                  <div class="oil-card-icon">🌱</div>
+                  <div class="oil-card-name">Organic</div>
+                  <div class="oil-card-desc">Certified organic · No pesticides · Premium</div>
+                  <div class="oil-card-price">₹340/Litre</div>
+                </div>
+              </label>
+            </div>
+
+            <!-- Quantity -->
+            <div class="form-group">
+              <label class="form-label" for="quantity">Quantity (Litres) <span class="required">*</span></label>
+              <div class="qty-wrap">
+                <button type="button" class="qty-btn" id="qtyMinus">−</button>
+                <input
+                  type="number"
+                  id="quantity"
+                  name="quantity"
+                  class="form-input qty-input"
+                  value="5"
+                  min="1"
+                  max="10000"
+                  placeholder="Enter litres"
+                  required
+                />
+                <button type="button" class="qty-btn" id="qtyPlus">+</button>
+                <span class="qty-unit">Litres</span>
+              </div>
+              <p class="form-hint">Minimum 1 litre · Bulk orders welcome · Max 10,000 litres per order</p>
+            </div>
+
+            <!-- Quick presets -->
+            <div class="qty-presets">
+              <span class="preset-label">Quick select:</span>
+              <button type="button" class="preset-btn" data-qty="1">1 L</button>
+              <button type="button" class="preset-btn" data-qty="5">5 L</button>
+              <button type="button" class="preset-btn" data-qty="15">15 L</button>
+              <button type="button" class="preset-btn" data-qty="50">50 L</button>
+              <button type="button" class="preset-btn" data-qty="100">100 L</button>
+              <button type="button" class="preset-btn" data-qty="500">500 L</button>
+            </div>
+
+            <!-- Packaging -->
+            <div class="form-group">
+              <label class="form-label">Packaging Preference</label>
+              <div class="radio-group">
+                <label class="radio-pill">
+                  <input type="radio" name="packaging" value="Pet Bottle (1L / 2L / 5L)" checked /> Pet Bottle (1L/2L/5L)
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="packaging" value="Pouch Pack (500ml/1L)" /> Pouch Pack
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="packaging" value="Jerry Can (15L / 20L)" /> Jerry Can (15L/20L)
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="packaging" value="Bulk Drum (200L)" /> Bulk Drum (200L)
+                </label>
+              </div>
+            </div>
+
+            <div class="step-actions">
+              <button type="button" class="btn-primary" id="toStep2">Continue to Details →</button>
+            </div>
+          </div>
+
+          <!-- ===== STEP 2: Customer Details ===== -->
+          <div class="form-step" id="formStep2">
+            <h2 class="step-title">Your Details</h2>
+            <p class="step-desc">Let us know who you are so we can confirm your order</p>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="firstName">First Name <span class="required">*</span></label>
+                <input type="text" id="firstName" name="firstName" class="form-input" placeholder="Rahul" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="lastName">Last Name <span class="required">*</span></label>
+                <input type="text" id="lastName" name="lastName" class="form-input" placeholder="Sharma" required />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="email">Email Address <span class="required">*</span></label>
+              <input type="email" id="email" name="email" class="form-input" placeholder="rahul@example.com" required />
+              <p class="form-hint">Order confirmation will be sent to this email</p>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="phone">Phone / WhatsApp <span class="required">*</span></label>
+              <div class="phone-wrap">
+                <span class="phone-prefix">🇮🇳 +91</span>
+                <input type="tel" id="phone" name="phone" class="form-input phone-input" placeholder="9876543210" maxlength="10" required />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="company">Company / Business (optional)</label>
+                <input type="text" id="company" name="company" class="form-input" placeholder="Your business name" />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="gstin">GSTIN (optional)</label>
+                <input type="text" id="gstin" name="gstin" class="form-input" placeholder="22AAAAA0000A1Z5" maxlength="15" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Customer Type</label>
+              <div class="radio-group">
+                <label class="radio-pill">
+                  <input type="radio" name="customerType" value="Individual / Household" checked /> Individual / Household
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="customerType" value="Restaurant / Hotel" /> Restaurant / Hotel
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="customerType" value="Retailer / Distributor" /> Retailer / Distributor
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="customerType" value="Industrial / Manufacturer" /> Industrial / Manufacturer
+                </label>
+              </div>
+            </div>
+
+            <div class="step-actions">
+              <button type="button" class="btn-secondary" id="backToStep1">← Back</button>
+              <button type="button" class="btn-primary" id="toStep3">Continue to Delivery →</button>
+            </div>
+          </div>
+
+          <!-- ===== STEP 3: Delivery ===== -->
+          <div class="form-step" id="formStep3">
+            <h2 class="step-title">Delivery Information</h2>
+            <p class="step-desc">Where should we deliver your order?</p>
+
+            <div class="form-group">
+              <label class="form-label" for="addressLine1">Street Address <span class="required">*</span></label>
+              <input type="text" id="addressLine1" name="addressLine1" class="form-input" placeholder="House/Flat No., Street Name" required />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="addressLine2">Area / Locality</label>
+              <input type="text" id="addressLine2" name="addressLine2" class="form-input" placeholder="Landmark, Area" />
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="city">City <span class="required">*</span></label>
+                <input type="text" id="city" name="city" class="form-input" placeholder="Mumbai" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="pincode">PIN Code <span class="required">*</span></label>
+                <input type="text" id="pincode" name="pincode" class="form-input" placeholder="400001" maxlength="6" required />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="state">State <span class="required">*</span></label>
+                <select id="state" name="state" class="form-input form-select" required>
+                  <option value="">Select State</option>
+                  <option>Andhra Pradesh</option><option>Arunachal Pradesh</option><option>Assam</option>
+                  <option>Bihar</option><option>Chhattisgarh</option><option>Goa</option>
+                  <option>Gujarat</option><option>Haryana</option><option>Himachal Pradesh</option>
+                  <option>Jharkhand</option><option>Karnataka</option><option>Kerala</option>
+                  <option>Madhya Pradesh</option><option>Maharashtra</option><option>Manipur</option>
+                  <option>Meghalaya</option><option>Mizoram</option><option>Nagaland</option>
+                  <option>Odisha</option><option>Punjab</option><option>Rajasthan</option>
+                  <option>Sikkim</option><option>Tamil Nadu</option><option>Telangana</option>
+                  <option>Tripura</option><option>Uttar Pradesh</option><option>Uttarakhand</option>
+                  <option>West Bengal</option><option>Delhi</option><option>Puducherry</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="deliveryDate">Preferred Delivery Date</label>
+                <input type="date" id="deliveryDate" name="deliveryDate" class="form-input" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Delivery Mode</label>
+              <div class="radio-group">
+                <label class="radio-pill">
+                  <input type="radio" name="deliveryMode" value="Standard (5-7 days)" checked /> Standard (5–7 days)
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="deliveryMode" value="Express (2-3 days)" /> Express (2–3 days)
+                </label>
+                <label class="radio-pill">
+                  <input type="radio" name="deliveryMode" value="Self Pickup" /> Self Pickup
+                </label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="notes">Special Instructions (optional)</label>
+              <textarea id="notes" name="notes" class="form-input form-textarea" rows="3" placeholder="Any specific requirements, brand preferences, or delivery instructions…"></textarea>
+            </div>
+
+            <!-- Terms -->
+            <label class="checkbox-row">
+              <input type="checkbox" id="agreeTerms" required />
+              <span>I agree to the <a href="#" class="inline-link">Terms & Conditions</a> and confirm the details above are correct.</span>
+            </label>
+
+            <div class="step-actions">
+              <button type="button" class="btn-secondary" id="backToStep2">← Back</button>
+              <button type="submit" class="btn-primary btn-submit" id="submitBtn">
+                <span id="submitText">🛒 Place Order</span>
+                <span id="submitSpinner" style="display:none">⏳ Sending…</span>
+              </button>
+            </div>
+          </div>
+
+        </form>
+
+        <!-- SUCCESS MESSAGE -->
+        <div class="order-success" id="orderSuccess" style="display:none">
+          <div class="success-icon">✅</div>
+          <h2>Order Placed Successfully!</h2>
+          <p>Thank you! Your order has been received. We'll contact you within <strong>24 hours</strong> to confirm delivery details.</p>
+          <p class="success-id">Order Ref: <span id="orderRef"></span></p>
+          <div class="success-actions">
+            <a href="index.html" class="btn-secondary">← Back to Market</a>
+            <button class="btn-primary" onclick="resetForm()">Place Another Order</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ===== RIGHT: SUMMARY PANEL ===== -->
+      <aside class="order-summary">
+        <div class="summary-card sticky-summary">
+          <h3 class="summary-title">📋 Order Summary</h3>
+
+          <div class="summary-row">
+            <span class="summary-key">Oil Type</span>
+            <span class="summary-val" id="sumType">Refined Groundnut Oil</span>
+          </div>
+          <div class="summary-row">
+            <span class="summary-key">Quantity</span>
+            <span class="summary-val" id="sumQty">5 Litres</span>
+          </div>
+          <div class="summary-row">
+            <span class="summary-key">Packaging</span>
+            <span class="summary-val" id="sumPack">Pet Bottle</span>
+          </div>
+
+          <div class="summary-divider"></div>
+
+          <div class="summary-row">
+            <span class="summary-key">Unit Price</span>
+            <span class="summary-val" id="sumUnitPrice">₹192/L</span>
+          </div>
+          <div class="summary-row">
+            <span class="summary-key">Oil Cost</span>
+            <span class="summary-val" id="sumOilCost">₹960</span>
+          </div>
+          <div class="summary-row">
+            <span class="summary-key">GST (5%)</span>
+            <span class="summary-val" id="sumGst">₹48</span>
+          </div>
+          <div class="summary-row">
+            <span class="summary-key">Delivery</span>
+            <span class="summary-val">FREE</span>
+          </div>
+
+          <div class="summary-divider"></div>
+
+          <div class="summary-row summary-total">
+            <span>Total Payable</span>
+            <span class="total-amt" id="sumTotal">₹1,008</span>
+          </div>
+
+          <div class="summary-note">
+            💳 Payment on delivery · UPI · Bank Transfer
+          </div>
+
+          <div class="price-ticker-mini">
+            <div class="mini-tick-label">Today's Market Rate</div>
+            <div class="mini-tick-val">₹192/L · <span class="change-up">+1.53%</span></div>
+          </div>
+        </div>
+
+        <!-- Trust badges -->
+        <div class="trust-badges">
+          <div class="trust-badge"><span>🏅</span> Premium Quality</div>
+          <div class="trust-badge"><span>🚚</span> Free Delivery ≥1L</div>
+          <div class="trust-badge"><span>🔒</span> Secure Order</div>
+          <div class="trust-badge"><span>📞</span> 24h Support</div>
+        </div>
+      </aside>
+
+    </div>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer" style="margin-top:0">
+    <div class="container">
+      <div class="footer-bottom">
+        <span>© 2026 GroundnutOil Markets · All rights reserved</span>
+        <span><a href="index.html" style="color:var(--gold);text-decoration:none;">← Back to Market Dashboard</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="order.js"></script>
+</body>
+</html>
